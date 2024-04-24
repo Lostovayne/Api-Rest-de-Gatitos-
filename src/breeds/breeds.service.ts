@@ -29,6 +29,6 @@ export class BreedsService {
   }
 
   async remove(id: number) {
-    return `This action removes a #${id} breed`;
+    return await this.breedRepository.softDelete({ id });
   }
 }
