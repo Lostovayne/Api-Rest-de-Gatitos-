@@ -5,7 +5,6 @@ import {
     IsString,
     MinLength
 } from 'class-validator';
-import { Breed } from 'src/breeds/entities/breed.entity';
 
 export class CreateCatDto {
   @IsString()
@@ -18,5 +17,5 @@ export class CreateCatDto {
 
   @IsString()
   @IsOptional()
-  breed?: Breed;
+  breed?: string ;
 }
