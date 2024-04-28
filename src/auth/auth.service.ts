@@ -6,9 +6,9 @@ import {
 import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from './dto/register.dto';
 
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
-import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
@@ -37,8 +37,7 @@ export class AuthService {
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) throw new BadRequestException('password not match');
 
-    const payload = { email: user.email };
-
+    const payload = { email: user.email, role: user.role };
     const token = await this.jwtService.signAsync(payload);
 
     return {
