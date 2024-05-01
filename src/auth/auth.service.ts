@@ -9,6 +9,7 @@ import { RegisterDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class AuthService {
@@ -44,5 +45,9 @@ export class AuthService {
       token,
       email,
     };
+  }
+
+  async profile(user: any) {
+    return await this.usersService.findOneByEmail(user.email);
   }
 }
