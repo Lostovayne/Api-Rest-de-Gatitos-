@@ -18,11 +18,18 @@ export class UsersService {
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userRepository.find()
   }
 
   async findOneByEmail(email: string) {
     return await this.userRepository.findOneBy({ email });
+  }
+
+  async findByEmailWithPassword(email: string) {
+    return await this.userRepository.findOne({
+      where: { email },
+      select:["id","name","email","password","role"],
+    });
   }
 
   findOne(id: number) {
